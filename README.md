@@ -5,7 +5,7 @@ _whenever possible_.
 
 ## TODO
 
-[ ] showip.c
+[X] showip.c
 [ ] server.c
 [ ] client.c
 [ ] listener.c

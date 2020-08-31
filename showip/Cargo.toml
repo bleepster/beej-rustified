@@ -1,0 +1,12 @@
+[package]
+name = "showip"
+version = "0.1.0"
+authors = ["bleepster <earl.lapus@gmail.com>"]
+edition = "2018"
+
+[[bin]]
+name = "showip"
+path = "src/main.rs"
+
+[dependencies]
+clap = "2.33.0"
