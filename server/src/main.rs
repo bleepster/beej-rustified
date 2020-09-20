@@ -1,7 +1,10 @@
+use std::io::prelude::*;
 use std::io::Error;
 use std::net::TcpListener;
+use std::net::Shutdown;
 
 use dns_lookup::{getaddrinfo, AddrInfoHints, SockType};
+use nix::unistd::{fork, ForkResult};
 
 fn main() -> Result<(), Error> {
     let port = "3490";
@@ -32,7 +35,25 @@ fn main() -> Result<(), Error> {
     } {
         loop {
             match listener.accept() {
-                Ok((_socket, addr)) => println!("new client: {:?}", addr),
+                Ok((mut stream, addr)) => {
+                    println!("connection accepted: {:?}", addr);
+                    match fork() {
+                        Ok(ForkResult::Child) => {
+                            stream.write(b"Hello world!")?;
+                            stream.flush()?;
+                            stream.shutdown(Shutdown::Both).expect("Parent shutdown failed")
+                        },
+                        Ok(ForkResult::Parent {child: _, ..}) => {
+                            // XXX: If I shut this down the child gets shutdown too
+                            //      Parent and Child are sharing a copy?
+                            // stream.shutdown(Shutdown::Both).expect("Parent shutdown failed")
+                            println!("Parent...")
+                        },
+                        Err(_) => {
+                            println!("fork() failed")
+                        },
+                    }
+                },
                 Err(e) => println!("attempt from client: {:?} failed", e),
             }
         }
