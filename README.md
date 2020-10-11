@@ -14,7 +14,7 @@ C implementation. It does have to behave identically feature-wise.
 
 - [X] showip.c
 - [X] server.c
-- [ ] client.c
+- [X] client.c
 - [ ] listener.c
 - [ ] talker.c
 - [ ] poll.c

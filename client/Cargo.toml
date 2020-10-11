@@ -1,0 +1,13 @@
+[package]
+name = "client"
+version = "0.1.0"
+authors = ["bleepster <earl.lapus@gmail.com>"]
+edition = "2018"
+
+
+[[bin]]
+name = "client"
+path = "src/main.rs"
+
+[dependencies]
+dns-lookup = "0.9.0"
