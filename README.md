@@ -13,7 +13,7 @@ C implementation. It does have to behave identically feature-wise.
 ## TODO
 
 - [X] showip.c
-- [ ] server.c
+- [X] server.c
 - [ ] client.c
 - [ ] listener.c
 - [ ] talker.c
